@@ -1,3 +1,9 @@
 from django.contrib import admin
+from .models import Places
 
-# Register your models here.
+
+class PlacesAdmin(admin.ModelAdmin):
+    fields = ("name", "description", "coordinates", "user")
+
+
+admin.site.register(Places, PlacesAdmin)

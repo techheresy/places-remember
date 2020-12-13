@@ -1,5 +1,6 @@
 import environ
 
+
 ROOT_DIR = environ.Path(__file__) - 2
 
 env = environ.Env()
@@ -29,7 +30,7 @@ THIRD_PARTY_APPS = [
     "django_extensions",
 ]
 
-LOCAL_APPS = ["apps.users.apps.UsersConfig"]
+LOCAL_APPS = ["apps.places", "apps.users"]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -157,7 +158,6 @@ REST_FRAMEWORK = {
         "rest_framework.parsers.FileUploadParser",
     ],
 }
-
 
 REST_AUTH_SERIALIZERS = {
     "USER_DETAILS_SERIALIZER": "users.serializers.UserSerializer",
