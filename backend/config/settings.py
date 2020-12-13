@@ -29,7 +29,7 @@ THIRD_PARTY_APPS = [
     "django_extensions",
 ]
 
-LOCAL_APPS = []
+LOCAL_APPS = ["apps.users.apps.UsersConfig"]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -138,6 +138,8 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
+AUTH_USER_MODEL = "users.User"
+
 REST_USE_JWT = True
 
 REST_FRAMEWORK = {
@@ -157,8 +159,6 @@ REST_FRAMEWORK = {
 }
 
 
-# TODO: Create Serializer
-# REST_AUTH_SERIALIZERS = {"USER_DETAILS_SERIALIZER": ""}
-
-# TODO: Create Model
-# AUTH_USER_MODEL = ""
+REST_AUTH_SERIALIZERS = {
+    "USER_DETAILS_SERIALIZER": "users.serializers.UserSerializer",
+}
