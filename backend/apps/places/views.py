@@ -4,7 +4,7 @@ from .serializers import PlacesSerializer
 from .models import Places
 
 
-class PlacesViewSet(viewsets.ModelViewSet, viewsets.ViewSetMixin):
+class PlacesViewSet(viewsets.ModelViewSet):
     serializer_class = PlacesSerializer
     queryset = Places.objects.all()
     permission_classes = [permissions.IsAuthenticated]
