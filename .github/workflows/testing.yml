@@ -1,0 +1,70 @@
+name: Testing
+on: [ push, pull_request ]
+env:
+  DEBUG: True
+  SECRET_KEY: secret_key
+  ADMIN_EMAIL: techheresy@gmail.com
+  DOMAIN: localhost
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_USER: postgres
+  POSTGRES_DB: testing
+  POSTGRES_HOST: localhost
+  POSTGRES_PORT: 5432
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: ${{env.POSTGRES_PASSWORD}}
+          POSTGRES_USER: ${{env.POSTGRES_USER}}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+
+      - name: Install PSQL, GEOS, PROJ.4 and GDAL
+        run: |
+          sudo apt-get install postgis postgresql-13 postgresql-client-13 postgresql-13-postgis-3 postgresql-13-postgis-3-scripts
+          sudo apt-get install libproj-dev proj-data proj-bin libgeos-dev gdal-bin
+
+      - name: Run PSQL
+        run: |
+          sudo service postgresql start
+          echo `psql --version`
+
+      - name: Create DB
+        run: |
+          sudo -u postgres psql -c "ALTER USER ${{env.POSTGRES_USER}} PASSWORD '${{env.POSTGRES_PASSWORD}}';"
+          sudo -u postgres psql -c 'CREATE DATABASE ${{env.POSTGRES_DB}}'
+          sudo -u postgres psql -d ${{env.POSTGRES_DB}} -c 'CREATE EXTENSION postgis'
+
+      - name: Install Py Packages
+        working-directory: ./backend
+        run: |
+          python3 -m pip install --upgrade pip
+          pip3 install -r requirements.txt
+
+      - name: Coverage Django Tests
+        working-directory: ./backend
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: ${{env.DEBUG}}
+          SECRET_KEY: ${{env.SECRET_KEY}}
+          ADMIN_EMAIL: ${{env.ADMIN_EMAIL}}
+          DOMAIN: ${{env.DOMAIN}}
+          POSTGRES_PASSWORD: ${{env.POSTGRES_PASSWORD}}
+          POSTGRES_USER: ${{env.POSTGRES_USER}}
+          POSTGRES_DB: ${{env.POSTGRES_DB}}
+          POSTGRES_HOST: ${{env.POSTGRES_HOST}}
+          POSTGRES_PORT: ${{env.POSTGRES_PORT}}
+        run: |
+          coverage run --source='.' manage.py test
+          coveralls
