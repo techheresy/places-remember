@@ -1,6 +1,8 @@
 ## Places Remember
 
-[![code formatter: black](https://img.shields.io/badge/formatter-black-black)](https://github.com/psf/black)
-[![code style: we-make-service](https://img.shields.io/badge/style-wemake-000000.svg)](https://github.com/wemake-services/wemake-python-styleguide)
+
+![black](https://github.com/techheresy/places-remember/workflows/black/badge.svg)
+![testing](https://github.com/techheresy/places-remember/workflows/testing/badge.svg)
+[![coverage](https://coveralls.io/repos/github/techheresy/places-remember/badge.svg?branch=master)](https://coveralls.io/github/techheresy/places-remember?branch=master)
 
 Homework for the company [Very Interesting](https://www.interesnee.ru/)
