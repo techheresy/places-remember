@@ -1,4 +1,4 @@
-name: Autoblack Push
+name: black
 on: [ push ]
 jobs:
   autoblack:
