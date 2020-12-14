@@ -1,6 +1,5 @@
 import environ
 
-
 ROOT_DIR = environ.Path(__file__) - 2
 
 env = environ.Env()

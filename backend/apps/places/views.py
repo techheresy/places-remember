@@ -1,7 +1,7 @@
-from rest_framework import viewsets, permissions, generics
+from rest_framework import generics, permissions, viewsets
 
-from .serializers import PlacesSerializer
 from .models import Places
+from .serializers import PlacesSerializer
 
 
 class PlacesViewSet(
