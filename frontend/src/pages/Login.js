@@ -1,11 +1,9 @@
-import axios from "axios";
 import React, { useEffect } from "react";
 import FacebookLogin from "react-facebook-login";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
 import { loginUser } from "../redux/auth/authActions";
-import { showNotify } from "../redux/notification/notifyActions";
 
 const RootContainer = styled.div`
   width: 20rem;
@@ -29,18 +27,6 @@ function Login(props) {
     }
   }, [props.auth.isAuthenticated, props.history]);
 
-  function responseFacebook(response) {
-    axios
-      .post("http://localhost:8000/auth/facebook/", response)
-      .then((res) => {
-        // TODO: callback backend
-        // TODO: store user data
-      })
-      .catch((err) => {
-        props.showNotify("danger", String(err));
-      });
-  }
-
   return (
     <RootContainer className="shadow p-3 mb-5 bg-white rounded">
       <div>
@@ -56,7 +42,7 @@ function Login(props) {
           appId="1057291988076073"
           autoLoad={true}
           fields="name,email,picture"
-          callback={responseFacebook}
+          callback={props.loginUser}
         />
       </ButtonContainer>
     </RootContainer>
@@ -67,4 +53,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { loginUser, showNotify })(Login);
+export default connect(mapStateToProps, { loginUser })(Login);
