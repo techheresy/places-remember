@@ -44,9 +44,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-SITE_ID = 1
-
 DEBUG = env.bool("DEBUG")
+
+AUTO_INIT_SOCIAL_APP = env.bool("AUTO_INIT_SOCIAL_APP", default=True)
 
 SECRET_KEY = env.str("SECRET_KEY")
 
