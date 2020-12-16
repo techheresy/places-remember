@@ -46,7 +46,7 @@ MIDDLEWARE = [
 
 DEBUG = env.bool("DEBUG")
 
-AUTO_INIT_SOCIAL_APP = env.bool("AUTO_INIT_SOCIAL_APP", default=True)
+AUTO_INIT_SOCIAL_APP = env.bool("AUTO_INIT_SOCIAL_APP", default=False)
 
 SECRET_KEY = env.str("SECRET_KEY")
 
