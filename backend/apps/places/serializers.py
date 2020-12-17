@@ -1,11 +1,13 @@
-from rest_framework import serializers
+from rest_framework.serializers import HiddenField, CurrentUserDefault
+from rest_framework_gis.serializers import GeoModelSerializer
 
 from .models import Places
 
 
-class PlacesSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+class PlacesSerializer(GeoModelSerializer):
+    user = HiddenField(default=CurrentUserDefault())
 
     class Meta:
         model = Places
-        fields = ("name", "description", "coordinates", "user")
+        geo_field = "coordinates"
+        fields = ("id", "name", "description", "coordinates", "user")
