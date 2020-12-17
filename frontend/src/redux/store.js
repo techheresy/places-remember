@@ -3,12 +3,14 @@ import thunk from "redux-thunk";
 
 import authReducer from "./auth/authReducer";
 import notifyReducer from "./notification/notifyReducer";
+import placesReducer from "./places/placesReducer";
 
 const initialState = {};
 
 const middleware = [thunk];
 
 const rootReducer = combineReducers({
+  place: placesReducer,
   auth: authReducer,
   notify: notifyReducer,
 });
