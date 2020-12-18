@@ -4,8 +4,8 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
+import { save } from "../redux/editor/editorActions";
 import { showNotify } from "../redux/notification/notifyActions";
-import { save } from "../redux/places/placesActions";
 
 const StyledMapContainer = styled(MapContainer)`
   height: 75vh;
@@ -13,17 +13,17 @@ const StyledMapContainer = styled(MapContainer)`
   cursor: pointer;
 `;
 
-function PlaceEditor({ save, place, showNotify, history }) {
+function Editor({ save, editor, showNotify, history }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [coordinates, setCoordinates] = useState(null);
 
-  const id = place.id;
+  const id = editor.id;
 
   if (id) {
-    setTitle(place.title);
-    setDescription(place.description);
-    setCoordinates(place.coordinates);
+    setTitle(editor.title);
+    setDescription(editor.description);
+    setCoordinates(editor.coordinates);
   }
 
   const valid = (title, coordinates, description) => {
@@ -129,7 +129,7 @@ function PlaceEditor({ save, place, showNotify, history }) {
 }
 
 const mapStateToProps = (state) => ({
-  place: state.place,
+  editor: state.editor,
 });
 
-export default connect(mapStateToProps, { save, showNotify })(PlaceEditor);
+export default connect(mapStateToProps, { save, showNotify })(Editor);

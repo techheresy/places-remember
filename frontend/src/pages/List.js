@@ -1,6 +1,6 @@
 import React from "react";
 
-function PlacesList() {
+function List() {
   // TODO: if data empty
   // TODO: if user already have data
 
@@ -11,4 +11,4 @@ function PlacesList() {
   );
 }
 
-export default PlacesList;
+export default List;

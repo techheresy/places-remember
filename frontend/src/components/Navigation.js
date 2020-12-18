@@ -4,15 +4,16 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 
-import { userLogout } from "../redux/auth/authActions";
+import { userLogout } from "../redux/login/loginActions";
 
 function Navigation(props) {
-  const { auth, userLogout } = props;
-  const { firstName, lastName, photoUrl } = auth.info;
+  const { login, userLogout } = props;
 
   useEffect(() => {}, [props.location]);
 
-  if (auth.isAuthenticated) {
+  if (login.isAuthenticated) {
+    const { firstName, lastName, photoUrl } = login.info;
+
     return (
       <Navbar bg="primary" variant="dark" expand="lg" fixed="top">
         <Navbar.Brand>
@@ -48,7 +49,7 @@ function Navigation(props) {
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  login: state.login,
 });
 
 export default withRouter(connect(mapStateToProps, { userLogout })(Navigation));

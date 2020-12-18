@@ -3,7 +3,7 @@ import FacebookLogin from "react-facebook-login";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
-import { loginUser } from "../redux/auth/authActions";
+import { loginUser } from "../redux/login/loginActions";
 
 const RootContainer = styled.div`
   width: 20rem;
@@ -22,10 +22,10 @@ const ButtonContainer = styled.div`
 
 function Login(props) {
   useEffect(() => {
-    if (props.auth.isAuthenticated) {
+    if (props.login.isAuthenticated) {
       props.history.push("/list");
     }
-  }, [props.auth.isAuthenticated, props.history]);
+  }, [props.login.isAuthenticated, props.history]);
 
   return (
     <RootContainer className="shadow p-3 mb-5 bg-white rounded">
@@ -50,7 +50,7 @@ function Login(props) {
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  login: state.login,
 });
 
 export default connect(mapStateToProps, { loginUser })(Login);

@@ -7,7 +7,7 @@ const initialState = {
   coordinates: "",
 };
 
-export default function placesReducer(state = initialState, action) {
+export default function editorReducer(state = initialState, action) {
   switch (action.type) {
     case PLACE_SET:
       return {

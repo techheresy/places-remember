@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navigation from "./components/Navigation";
 import Notification from "./components/Notification";
+import Editor from "./pages/Editor";
+import List from "./pages/List";
 import Login from "./pages/Login";
-import PlaceEditor from "./pages/PlaceEditor";
-import PlacesList from "./pages/PlacesList";
 import PrivateRoute from "./private-route/PrivateRoute";
 import store from "./redux/store";
 
@@ -17,8 +17,8 @@ function App() {
         <Route component={Login} exact path="/" />
         <Navigation />
         <Switch>
-          <PrivateRoute component={PlacesList} exact path="/list" />
-          <PrivateRoute component={PlaceEditor} exact path="/add" />
+          <PrivateRoute component={List} exact path="/list" />
+          <PrivateRoute component={Editor} exact path="/add" />
         </Switch>
       </Router>
       <Notification />
