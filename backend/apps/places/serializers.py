@@ -1,4 +1,4 @@
-from rest_framework.serializers import HiddenField, CurrentUserDefault
+from rest_framework.serializers import CurrentUserDefault, HiddenField
 from rest_framework_gis.serializers import GeoModelSerializer
 
 from .models import Places
