@@ -1,37 +1,33 @@
-import axios from "axios";
-import jwt_decode from "jwt-decode";
-
+import { createFacebookUser } from "../../utils/apiRequests";
 import setAuthToken from "../../utils/setAuthToken";
 import { showNotify } from "../notification/notifyActions";
 import { SET_CURRENT_USER } from "./types";
 
 export const loginUser = ({ accessToken }) => (dispatch) => {
-  axios
-    .post("http://localhost:8000/auth/facebook/", { access_token: accessToken })
+  createFacebookUser(accessToken)
     .then((res) => {
       const {
         token,
         user: { first_name, last_name, photo },
       } = res.data;
-      const accountInfo = {
+      const user = {
         firstName: first_name,
         lastName: last_name,
         photoUrl: photo,
       };
-      const decoded = jwt_decode(token);
       localStorage.setItem("jwtToken", token);
       setAuthToken(token);
-      dispatch(setCurrentUser({ accountInfo: accountInfo, decoded: decoded }));
+      dispatch(setCurrentUser({ user: user }));
     })
     .catch((err) => {
-      dispatch(showNotify("danger", String(err)));
+      dispatch(showNotify("danger", err));
     });
 };
 
-export const setCurrentUser = (userData) => {
+export const setCurrentUser = (user) => {
   return {
     type: SET_CURRENT_USER,
-    payload: userData,
+    payload: user,
   };
 };
 

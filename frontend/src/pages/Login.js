@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 
 import { loginUser } from "../redux/login/loginActions";
+import { getPlaces } from "../redux/places/placesActions";
 
 const RootContainer = styled.div`
   width: 20rem;
@@ -20,12 +21,13 @@ const ButtonContainer = styled.div`
   justify-content: flex-end;
 `;
 
-function Login(props) {
+function Login({ login: { isAuthenticated }, loginUser, getPlaces, history }) {
   useEffect(() => {
-    if (props.login.isAuthenticated) {
-      props.history.push("/list");
+    if (isAuthenticated) {
+      getPlaces();
+      history.push("/places");
     }
-  }, [props.login.isAuthenticated, props.history]);
+  }, [isAuthenticated, history]);
 
   return (
     <RootContainer className="shadow p-3 mb-5 bg-white rounded">
@@ -42,7 +44,7 @@ function Login(props) {
           appId="1057291988076073"
           autoLoad={true}
           fields="name,email,picture"
-          callback={props.loginUser}
+          callback={loginUser}
         />
       </ButtonContainer>
     </RootContainer>
@@ -53,4 +55,4 @@ const mapStateToProps = (state) => ({
   login: state.login,
 });
 
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(mapStateToProps, { loginUser, getPlaces })(Login);

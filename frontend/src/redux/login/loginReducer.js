@@ -5,7 +5,6 @@ const isEmpty = require("is-empty");
 const initialState = {
   isAuthenticated: false,
   user: {},
-  info: {},
 };
 
 export default function loginReducer(state = initialState, action) {
@@ -14,8 +13,7 @@ export default function loginReducer(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: !isEmpty(action.payload),
-        user: action.payload.decoded,
-        info: action.payload.accountInfo,
+        user: action.payload.user,
       };
     default:
       return state;

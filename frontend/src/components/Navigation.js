@@ -6,14 +6,15 @@ import { Link } from "react-router-dom";
 
 import { userLogout } from "../redux/login/loginActions";
 
-function Navigation(props) {
-  const { login, userLogout } = props;
+function Navigation({
+  login: { user, isAuthenticated },
+  userLogout,
+  location,
+}) {
+  useEffect(() => {}, [location]);
 
-  useEffect(() => {}, [props.location]);
-
-  if (login.isAuthenticated) {
-    const { firstName, lastName, photoUrl } = login.info;
-
+  if (isAuthenticated) {
+    const { firstName, lastName, photoUrl } = user;
     return (
       <Navbar bg="primary" variant="dark" expand="lg" fixed="top">
         <Navbar.Brand>
@@ -29,7 +30,7 @@ function Navigation(props) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto" activeKey={window.location.pathname}>
-            <NavLink as={Link} eventKey="/list" to="/list">
+            <NavLink as={Link} eventKey="/places" to="/places">
               My places
             </NavLink>
             <NavLink as={Link} eventKey="/add" to="/add">

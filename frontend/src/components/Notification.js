@@ -15,9 +15,7 @@ const NotificationContainer = styled.div`
   z-index: 999;
 `;
 
-function Notification(props) {
-  const { showed, variant, message, closeNotify } = props;
-
+function Notification({ notify: { showed, variant, message }, closeNotify }) {
   useEffect(() => {
     if (showed) {
       const timer = setTimeout(() => {
@@ -39,9 +37,8 @@ function Notification(props) {
   return null;
 }
 
-function mapStateToProps({ notify }) {
-  const { showed, variant, message } = notify;
-  return { showed, variant, message };
-}
+const mapStateToProps = (state) => ({
+  notify: state.notify,
+});
 
 export default connect(mapStateToProps, { closeNotify })(Notification);

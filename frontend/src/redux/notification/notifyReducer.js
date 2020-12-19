@@ -12,7 +12,7 @@ export default function notifyReducer(state = initialState, action) {
       return {
         ...state,
         showed: action.payload.showed,
-        message: action.payload.message,
+        message: String(action.payload.message),
         variant: action.payload.variant,
       };
     case NOTIFY_CLOSE:
