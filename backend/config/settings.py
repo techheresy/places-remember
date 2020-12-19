@@ -1,3 +1,5 @@
+import datetime
+
 import environ
 
 ROOT_DIR = environ.Path(__file__) - 2
@@ -144,6 +146,10 @@ AUTHENTICATION_BACKENDS = [
 AUTH_USER_MODEL = "users.User"
 
 REST_USE_JWT = True
+
+JWT_AUTH = {
+    "JWT_EXPIRATION_DELTA": datetime.timedelta(days=10),
+}
 
 REST_FRAMEWORK = {
     "UPLOADED_FILES_USE_URL": False,
