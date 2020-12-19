@@ -72,9 +72,7 @@ function Places({ places: { places, loading } }) {
           <PlacesContainer>
             <NoMemoriesMessage>
               <span className="pr-1">No memories!</span>
-              <Link to="/add">
-                Add new️?️
-              </Link>
+              <Link to="/add">Add new️?️</Link>
             </NoMemoriesMessage>
           </PlacesContainer>
         </Container>
