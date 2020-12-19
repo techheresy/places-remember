@@ -6,4 +6,4 @@ from ..models import Places
 
 class PlacesModelsTest(TestCase):
     def test_max_length(self):
-        self.assertEqual(Places.name.field.max_length, 255)
+        self.assertEqual(Places.title.field.max_length, 255)

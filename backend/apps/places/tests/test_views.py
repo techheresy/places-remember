@@ -10,7 +10,7 @@ from ..views import PlacesViewSet
 class PlacesViewsTest(TestCase):
     def setUp(self):
         self.data = {
-            "name": "name",
+            "title": "title",
             "description": "description",
             "coordinates": "SRID=4326;POINT(1 1)",
         }

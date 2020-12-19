@@ -10,7 +10,7 @@ from ..serializers import PlacesSerializer
 class PlacesSerializersTest(TestCase):
     def setUp(self):
         self.data = {
-            "name": "name",
+            "title": "title",
             "description": "description",
             "coordinates": Point(1, 1),
         }
@@ -23,7 +23,7 @@ class PlacesSerializersTest(TestCase):
     def test_valid_serializer(self):
         data = self.serializer.data
 
-        self.assertEqual(data.get("name"), "name")
+        self.assertEqual(data.get("title"), "title")
         self.assertEqual(data.get("description"), "description")
         self.assertEqual(
             data.get("coordinates"),

@@ -4,7 +4,7 @@ from .models import Places
 
 
 class PlacesAdmin(admin.ModelAdmin):
-    fields = ("name", "description", "coordinates", "user")
+    fields = ("title", "description", "coordinates", "user")
 
 
 admin.site.register(Places, PlacesAdmin)

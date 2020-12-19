@@ -10,4 +10,4 @@ class PlacesSerializer(GeoModelSerializer):
     class Meta:
         model = Places
         geo_field = "coordinates"
-        fields = ("id", "name", "description", "coordinates", "user")
+        fields = ("id", "title", "description", "coordinates", "user")
