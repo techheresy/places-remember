@@ -36,8 +36,8 @@ function Login({ login: { isAuthenticated }, loginUser, getPlaces, history }) {
           env <strong>'REACT_APP_FACEBOOK_ID'</strong> is not set
         </h1>
         <img
-          src="https://lh3.googleusercontent.com/proxy/PvdCv3PwKucNXE4hA_ZaqfosHzQdjZ9hMi69D-eiyuzNiVlpLM8i2pMrP_Q9vX6rd236u8CYs1xXd-eVKVDGmLaHFABxnP5tV4tek19EA-mfbA293dlzWP8rWx0HBkMc7dGn8DXglJy8BcytVAENb3WZIZ7No2-9uhtGklcP3ij014SNP5lZjul5MmbyLbCRpm8"
-          alt="techpriest-repair"
+          src="https://www.flaticon.com/svg/static/icons/svg/2861/2861687.svg"
+          alt="need-app-id"
         />
       </div>
     );

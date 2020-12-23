@@ -32,11 +32,11 @@ THIRD_PARTY_APPS = [
     "django_extensions",
 ]
 
-LOCAL_APPS = ["apps.places", "apps.users"]
+LOCAL_APPS = ["apps.places", "apps.users", "apps.tools"]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
-MIDDLEWARE = [
+DJANGO_MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -47,31 +47,35 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-DEBUG = env.bool("DEBUG")
+LOCAL_MIDDLEWARE = [
+    "apps.tools.middleware.dynamic_site.DynamicSiteDomainMiddleware"
+]
 
-SITE_ID = 1
+MIDDLEWARE = DJANGO_MIDDLEWARE + LOCAL_MIDDLEWARE
 
-AUTO_INIT_SOCIAL_APP = env.bool("AUTO_INIT_SOCIAL_APP", default=False)
+DEBUG = env.bool("DEBUG", default=True)
 
-SECRET_KEY = env.str("SECRET_KEY")
+SECRET_KEY = env.str("SECRET_KEY", default="secretkey")
 
 CORS_ORIGIN_ALLOW_ALL = True
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*"])
 
-DOMAIN = env.str("DOMAIN")
+DEFAULT_SITE_ID = 1
 
-ADMINS = [("admin", env.str("ADMIN_EMAIL"))]
+DOMAIN = env.str("DOMAIN", default="127.0.0.1:8000")
+
+ADMINS = [("admin", env.str("ADMIN_EMAIL", default="email@example.com"))]
 
 MANAGERS = ADMINS
 
 DATABASES = {
     "default": {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
-        "NAME": env.str("POSTGRES_DB"),
-        "USER": env.str("POSTGRES_USER"),
-        "PASSWORD": env.str("POSTGRES_PASSWORD"),
-        "HOST": "localhost",
+        "NAME": env.str("POSTGRES_DB", default="postgres"),
+        "USER": env.str("POSTGRES_USER", default="postgres"),
+        "PASSWORD": env.str("POSTGRES_PASSWORD", default="postgres"),
+        "HOST": "127.0.0.1",
         "PORT": 5432,
     }
 }

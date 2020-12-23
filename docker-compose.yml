@@ -1,0 +1,39 @@
+version: "3.3"
+
+volumes:
+  postgres_data: { }
+
+services:
+  backend:
+    depends_on:
+      - postgres
+    build:
+      context: ./backend
+    volumes:
+      - ./backend:/app
+    entrypoint: /checkpostgres.sh
+    command: /gunicorn.sh
+
+  postgres:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - "8000:80"
+    depends_on:
+      - backend
+    volumes:
+      - ./backend/media/:/media/
+      - ./backend/staticfiles/:/staticfiles/
+      - ./nginx/prod.conf:/etc/nginx/nginx.conf:ro
+
+
