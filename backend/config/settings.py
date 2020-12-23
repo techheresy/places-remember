@@ -47,9 +47,7 @@ DJANGO_MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-LOCAL_MIDDLEWARE = [
-    "apps.tools.middleware.dynamic_site.DynamicSiteDomainMiddleware"
-]
+LOCAL_MIDDLEWARE = ["apps.tools.middleware.dynamic_site.DynamicSiteDomainMiddleware"]
 
 MIDDLEWARE = DJANGO_MIDDLEWARE + LOCAL_MIDDLEWARE
 

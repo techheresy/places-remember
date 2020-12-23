@@ -10,9 +10,9 @@ env.read_env()
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        site = Site.objects.get_or_create(
-            domain=settings.DOMAIN, name=settings.DOMAIN
-        )[0]
+        site = Site.objects.get_or_create(domain=settings.DOMAIN, name=settings.DOMAIN)[
+            0
+        ]
 
         socialapp = SocialApp.objects.get_or_create(
             provider="facebook",
